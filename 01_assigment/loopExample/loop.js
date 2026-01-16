@@ -11,4 +11,16 @@ for (let i = 1; i <= 1; i++) {             // Outer loop, ek hi baar chalega
   }
 }
 
+//  Second Example 
 
+let height = 5;
+
+for (let i = 1; i <= height; i++) {
+  let line = "";
+
+  for (let j = 1; j <= i; j++) {
+    line += j + " ";
+  }
+
+  console.log(line);
+}
