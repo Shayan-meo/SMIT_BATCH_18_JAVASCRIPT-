@@ -1,4 +1,4 @@
-// User se table number aur table length le lo
+
 var tableNumber = +prompt("Enter table number:");
 var tableLength = +prompt("Enter table length:");
 
@@ -11,3 +11,4 @@ for (let i = 1; i <= 1; i++) {             // Outer loop, ek hi baar chalega
     console.log(`${tableNumber} x ${j} = ${tableNumber * j}`);
   }
 }
+
