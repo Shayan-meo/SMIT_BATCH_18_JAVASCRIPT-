@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Age Calculator</title>
+    <style>
+        /* Modern typography and base styles */
+        :root {
+            --primary-blue: #4f8bf9;
+            --secondary-purple: #6a0dad;
+            --accent-mint: #40e0d0;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--light-text);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .instructions {
+            background: rgba(79, 139, 249, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(to right, var(--primary-blue), #3a7bd5);
+            color: white;
+        }
+
+        .reset-btn {
+            background: linear-gradient(to right, #6c757d, #495057);
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 20px;
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dob-display {
+            background: linear-gradient(to right, var(--accent-mint), #80eacb);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .result-item {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-purple);
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Age Calculator</h1>
+            <p class="subtitle">Discover how much time you've spent on Earth</p>
+            
+            <div class="instructions">
+                <p><strong>Instructions:</strong> Click the Calculate button to enter your birth date when prompted.</p>
+                <p>You'll be asked to enter your birth year, month, and date separately.</p>
+            </div>
+            
+            <div class="btn-group">
+                <button class="calculate-btn" id="calculate-btn">Calculate Age</button>
+                <button class="reset-btn" id="reset-btn">Reset</button>
+            </div>
+            
+            <div class="results-card" id="results-card">
+                <div class="dob-display" id="dobDisplay"></div>
+                
+                <div class="results-grid">
+                    <div class="result-item">
+                        <span class="result-label">Your Age</span>
+                        <span id="ageResult" class="result-value"></span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Days</span>
+                        <span id="daysResult" class="result-value"></span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Hours</span>
+                        <span id="hoursResult" class="result-value"></span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Minutes</span>
+                        <span id="minutesResult" class="result-value"></span>
+                    </div>
+                    
+                    <div class="result-item">
+                        <span class="result-label">Total Seconds</span>
+                        <span id="secondsResult" class="result-value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Original JavaScript logic preserved exactly as provided
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const resultsCard = document.getElementById('results-card');
+            
+            calculateBtn.addEventListener('click', function() {
+                // Execute the original app.js code
+                var year = +prompt("Enter your birth year (YYYY):");
+                var month = +prompt("Enter your birth month (1-12):");
+                var date = +prompt("Enter your birth date (1-31)");
+
+                // Validate inputs
+                if (!year || !month || !date) {
+                    alert('Please enter valid date values.');
+                    return;
+                }
+
+                // Validate date
+                var birthDate = new Date(year, month - 1, date);
+                if (birthDate.getFullYear() !== year || 
+                    birthDate.getMonth() !== month - 1 || 
+                    birthDate.getDate() !== date) {
+                    alert('Please enter a valid date.');
+                    return;
+                }
+
+                // Check if birth date is in the future
+                var currentDate = new Date();
+                if (birthDate > currentDate) {
+                    alert('Birth date cannot be in the future.');
+                    return;
+                }
+
+                // Js me month 0 se start hota hai, is liye -1
+                // Original calculation logic preserved exactly as provided
+                var diffMs = currentDate - birthDate;
+
+                //  Milliseconds → Days & Hours
+                var totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                var totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+                var totalMinutes = Math.floor(diffMs / (1000 * 60));
+                var totalSec = Math.floor(diffMs / (1000));
+
+                var age = Math.floor(totalDays/365);
+
+                //  Result - Display in the UI instead of alert
+                document.getElementById('dobDisplay').textContent =
+                    "Date of Birth: " + birthDate.toLocaleDateString();
+                document.getElementById('ageResult').textContent = age + " years";
+                document.getElementById('daysResult').textContent = totalDays.toLocaleString();
+                document.getElementById('hoursResult').textContent = totalHours.toLocaleString();
+                document.getElementById('minutesResult').textContent = totalMinutes.toLocaleString();
+                document.getElementById('secondsResult').textContent = totalSec.toLocaleString();
+
+                // Show the results section
+                resultsCard.style.display = 'block';
+
+                // Original confirmation dialog preserved
+                var ok = confirm("Do You Want To Play Again?");
+                if (ok) {
+                  resultsCard.style.display = 'none';
+                }
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                resultsCard.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
