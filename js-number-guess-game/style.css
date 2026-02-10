@@ -1,0 +1,125 @@
+/* Modern reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f2f5 0%, #e6e9ef 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+h1 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+#message {
+  min-height: 60px;
+  margin: 25px 0;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Color-coded feedback */
+.message-low {
+  color: #e74c3c;
+  background-color: #fdeded;
+}
+
+.message-high {
+  color: #e67e22;
+  background-color: #fef5e7;
+}
+
+.message-correct {
+  color: #27ae60;
+  background-color: #eafaf1;
+  font-weight: 600;
+}
+
+button {
+  background: linear-gradient(to right, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+  background: linear-gradient(to right, #2980b9, #2573a7);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#playAgainButton {
+  background: linear-gradient(to right, #2ecc71, #27ae60);
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+#playAgainButton:hover {
+  box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
+  background: linear-gradient(to right, #27ae60, #219653);
+}
+
+/* Animation for correct guess */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.correct-animation {
+  animation: pulse 0.5s ease-in-out;
+}
