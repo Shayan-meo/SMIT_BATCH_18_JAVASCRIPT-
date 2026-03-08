@@ -33,4 +33,3 @@ var ok = confirm("Do You Want To Play Again?");
 if (ok) {
   window.location.reload();
 }
-
